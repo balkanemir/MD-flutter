@@ -1,13 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-
+import '../models/movie.dart';
 import '../models/questions.dart';
 
 class MovieListView extends StatelessWidget {
   
+final List<Movie> movieList = Movie.getMovies();
+
   final List movies = [
     "Titanic",
     "Blade Runner",
@@ -31,7 +32,7 @@ class MovieListView extends StatelessWidget {
       ),
       backgroundColor: Colors.blueGrey.shade400,
       body: ListView.builder(
-        itemCount: movies.length,
+        itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
         return Card( 
           elevation: 4.5,
@@ -39,19 +40,25 @@ class MovieListView extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(
               child: Container(
+                width:200,
+                height: 200,
                 decoration: BoxDecoration(
-                  //color: Colors.deepPurple,
+                  image: DecorationImage(
+                    image: NetworkImage(movieList.elementAt(index).images[0]),
+                    fit: BoxFit.cover
+                  ),
                   borderRadius: BorderRadius.circular(13.0)
                 ),
-                child: Text("A")
+                
               )
             ),
             trailing: Text("..."),
-             title: Text(movies[index]),
-             subtitle: Text("Movie description"),
+             title: Text(movieList[index].title),
+             subtitle: Text("${movieList.elementAt(index).title}"),
              onTap: () {
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (context) =>  MovieListViewDetails(movieName: movies.elementAt(index),)));
+                  builder: (context) =>  MovieListViewDetails(movieName: movieList.elementAt(index).title, 
+                  movie: movieList.elementAt(index))));
              },
             // onTap: () => debugPrint("Movie Name: ${movies.elementAt(index)}"),
 
@@ -66,8 +73,9 @@ class MovieListView extends StatelessWidget {
 class MovieListViewDetails extends StatelessWidget {
 
   final String movieName;
+  final Movie movie;
 
-  const MovieListViewDetails({Key? key, required this.movieName}) : super(key: key); 
+  const MovieListViewDetails({Key? key, required this.movieName, required this.movie}) : super(key: key); 
 
   @override
   Widget build(BuildContext context) {
