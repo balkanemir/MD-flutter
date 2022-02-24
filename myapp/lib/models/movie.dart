@@ -21,7 +21,7 @@ class Movie {
       imdbID: imdbID,
       type: type,
       response: response,
-      images: images)
+      images: image)
   ];
   String title;
   String stringyear;
