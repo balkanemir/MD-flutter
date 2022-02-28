@@ -34,38 +34,75 @@ final List<Movie> movieList = Movie.getMovies();
       body: ListView.builder(
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
-        return Card( 
-          elevation: 4.5,
-          color: Colors.white,
-          child: ListTile(
-            leading: CircleAvatar(
-              child: Container(
-                width:200,
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(movieList.elementAt(index).images[0]),
-                    fit: BoxFit.cover
-                  ),
-                  borderRadius: BorderRadius.circular(13.0)
-                ),
+          return movieCard(movieList[index], context);
+        // return Card( 
+        //   elevation: 4.5,
+        //   color: Colors.white,
+        //   child: ListTile(
+        //     leading: CircleAvatar(
+        //       child: Container(
+        //         width:200,
+        //         height: 200,
+        //         decoration: BoxDecoration(
+        //           image: DecorationImage(
+        //             image: NetworkImage(movieList.elementAt(index).images[0]),
+        //             fit: BoxFit.cover
+        //           ),
+        //           borderRadius: BorderRadius.circular(13.0)
+        //         ),
                 
-              )
-            ),
-            trailing: Text("..."),
-             title: Text(movieList[index].title),
-             subtitle: Text("${movieList.elementAt(index).title}"),
-             onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) =>  MovieListViewDetails(movieName: movieList.elementAt(index).title, 
-                  movie: movieList.elementAt(index))));
-             },
-            // onTap: () => debugPrint("Movie Name: ${movies.elementAt(index)}"),
+        //       )
+        //     ),
+        //     trailing: Text("..."),
+        //      title: Text(movieList[index].title),
+        //      subtitle: Text("${movieList.elementAt(index).title}"),
+        //      onTap: () {
+        //         Navigator.push(context, MaterialPageRoute(
+        //           builder: (context) =>  MovieListViewDetails(movieName: movieList.elementAt(index).title, 
+        //           movie: movieList.elementAt(index))));
+        //      },
+        //     // onTap: () => debugPrint("Movie Name: ${movies.elementAt(index)}"),
 
-          )
-        );
+        //   )
+        // );
       })
       
+    );
+  }
+
+  Widget movieCard(Movie movie, BuildContext context) {
+    return InkWell(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 120.0,
+        child: Card(
+          color: Colors.black45,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 54.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [ 
+                  Text(movie.title),
+                  Text("Rating: ${movie.imdbRating} / 10")],),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Released: ${movie.released}"),
+                      Text(movie.runtime),
+                      Text(movie.stringRated)
+                    ],
+                  )
+              ],
+            ),
+          )
+        )
+
+      ),
+      onTap: () => debugPrint(movie.title),
     );
   }
 }
