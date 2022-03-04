@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/movie.dart';
 import '../models/questions.dart';
-
 class MovieListView extends StatelessWidget {
+
   
 final List<Movie> movieList = Movie.getMovies();
 
@@ -22,7 +22,6 @@ final List<Movie> movieList = Movie.getMovies();
     "Game of Thrones",
     "Vikings"  
   ];
-
   @override
   Widget build(BuildContext context) { 
     return Scaffold(
@@ -56,6 +55,7 @@ final List<Movie> movieList = Movie.getMovies();
         //           ),
         //           borderRadius: BorderRadius.circular(13.0)
         //         ),
+
                 
         //       )
         //     ),
@@ -162,19 +162,99 @@ class MovieListViewDetails extends StatelessWidget {
         title: Text("Movies"),
         backgroundColor: Colors.blueGrey,
       ),
-      body: Container(
-        child: Center(
-          child: RaisedButton( 
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Go Back  ${this.movieName}"),
-            ),
-        )
-      )
+      body: ListView(children: [
+        MovieDetailsThumbnail(thumbnail: movie.images[0]),
+        MovieDEtailsHeaderWithPoster(movie: movie)
+      ],)
+      // body: Container(
+      //   child: Center(
+      //     child: RaisedButton( 
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //       child: Text("Go Back  ${this.movieName}"),
+      //       ),
+      //   )
+      // )
     );
   }
 }
+
+class MovieDetailsThumbnail extends StatelessWidget {
+  final String thumbnail;
+  const MovieDetailsThumbnail({ Key? key, required this.thumbnail }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 190,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: NetworkImage(thumbnail),
+                fit: BoxFit.cover,)
+              )
+            ),
+            Icon(Icons.play_circle_outline, size: 100,
+            color: Colors.white)
+          ],
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [Color.fromARGB(0, 245, 245, 245), Color.fromARGB(255, 245, 245, 245)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter)
+          ),
+          height: 80,
+        )
+      ],
+      
+    );
+  }
+}
+
+class MovieDEtailsHeaderWithPoster extends StatelessWidget {
+  final Movie movie;
+
+  const MovieDEtailsHeaderWithPoster({Key? key, required this.movie}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(children: [
+        MoviePoster(poster: movie.images[0].toString())
+      ],),
+    );
+  }
+}
+
+class MoviePoster extends StatelessWidget {
+   final String poster;
+  const MoviePoster({ Key? key, required this.poster }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var borderRadius = BorderRadius.all(Radius.circular(10));
+    return Card(
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: Container(width: MediaQuery.of(context).size.width / 4,
+        height: 160.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: NetworkImage(poster),
+          fit: BoxFit.cover)
+        ))
+      
+     ) );
+  }
+}
+
 
 class QuizApp extends StatefulWidget {
   const QuizApp({ Key? key }) : super(key: key);
