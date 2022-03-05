@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/movie.dart';
 import '../models/questions.dart';
+import 'movie_ui/movie_ui.dart';
 class MovieListView extends StatelessWidget {
 
   
@@ -40,37 +41,6 @@ final List<Movie> movieList = Movie.getMovies();
             ),
           ],
           );
-        // return Card( 
-        //   elevation: 4.5,
-        //   color: Colors.white,
-        //   child: ListTile(
-        //     leading: CircleAvatar(
-        //       child: Container(
-        //         width:200,
-        //         height: 200,
-        //         decoration: BoxDecoration(
-        //           image: DecorationImage(
-        //             image: NetworkImage(movieList.elementAt(index).images[0]),
-        //             fit: BoxFit.cover
-        //           ),
-        //           borderRadius: BorderRadius.circular(13.0)
-        //         ),
-
-                
-        //       )
-        //     ),
-        //     trailing: Text("..."),
-        //      title: Text(movieList[index].title),
-        //      subtitle: Text("${movieList.elementAt(index).title}"),
-        //      onTap: () {
-        //         Navigator.push(context, MaterialPageRoute(
-        //           builder: (context) =>  MovieListViewDetails(movieName: movieList.elementAt(index).title, 
-        //           movie: movieList.elementAt(index))));
-        //      },
-        //     // onTap: () => debugPrint("Movie Name: ${movies.elementAt(index)}"),
-
-        //   )
-        // );
       })
       
     );
@@ -164,7 +134,11 @@ class MovieListViewDetails extends StatelessWidget {
       ),
       body: ListView(children: [
         MovieDetailsThumbnail(thumbnail: movie.images[0]),
-        MovieDEtailsHeaderWithPoster(movie: movie)
+        MovieDEtailsHeaderWithPoster(movie: movie),
+        HorizontalLine(),
+        MovieDetailsCast(movie: movie),
+        HorizontalLine(),
+        MovieDetailsExtraPosters(posters: movie.images,)
       ],)
       // body: Container(
       //   child: Center(
@@ -179,82 +153,6 @@ class MovieListViewDetails extends StatelessWidget {
     );
   }
 }
-
-class MovieDetailsThumbnail extends StatelessWidget {
-  final String thumbnail;
-  const MovieDetailsThumbnail({ Key? key, required this.thumbnail }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 190,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(thumbnail),
-                fit: BoxFit.cover,)
-              )
-            ),
-            Icon(Icons.play_circle_outline, size: 100,
-            color: Colors.white)
-          ],
-        ),
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Color.fromARGB(0, 245, 245, 245), Color.fromARGB(255, 245, 245, 245)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter)
-          ),
-          height: 80,
-        )
-      ],
-      
-    );
-  }
-}
-
-class MovieDEtailsHeaderWithPoster extends StatelessWidget {
-  final Movie movie;
-
-  const MovieDEtailsHeaderWithPoster({Key? key, required this.movie}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(children: [
-        MoviePoster(poster: movie.images[0].toString())
-      ],),
-    );
-  }
-}
-
-class MoviePoster extends StatelessWidget {
-   final String poster;
-  const MoviePoster({ Key? key, required this.poster }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var borderRadius = BorderRadius.all(Radius.circular(10));
-    return Card(
-      child: ClipRRect(
-        borderRadius: borderRadius,
-        child: Container(width: MediaQuery.of(context).size.width / 4,
-        height: 160.0,
-        decoration: BoxDecoration(
-          image: DecorationImage(image: NetworkImage(poster),
-          fit: BoxFit.cover)
-        ))
-      
-     ) );
-  }
-}
-
 
 class QuizApp extends StatefulWidget {
   const QuizApp({ Key? key }) : super(key: key);
