@@ -120,6 +120,7 @@ final List<Movie> movieList = Movie.getMovies();
 
 class MovieListViewDetails extends StatelessWidget {
 
+
   final String movieName;
   final Movie movie;
 
@@ -177,9 +178,9 @@ class _QuizAppState extends State<QuizApp> {
       appBar: AppBar(
         title: Text("True Citizen"),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
+        //backgroundColor: Colors.blueGrey,
       ),
-      backgroundColor: Colors.blueGrey,
+      //backgroundColor: Colors.blueGrey,
       body: Builder(
         builder: (BuildContext context) {
           return Container(
@@ -198,7 +199,7 @@ class _QuizAppState extends State<QuizApp> {
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.blueGrey,
+                      //color: Colors.blueGrey,
                       borderRadius: BorderRadius.circular(8.0),
                       border: Border.all(
                         color: Colors.blueGrey.shade400,
@@ -208,10 +209,9 @@ class _QuizAppState extends State<QuizApp> {
                     ),
                     height: 120.0,
                     child: Center(
-                      child: Text(questionBank[_currentQuestionIndex].questionText, style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold )),
+                      child: Text(questionBank[_currentQuestionIndex].questionText, 
+                      //style: TextStyle(color: Colors.white,fontSize: 15.0, fontWeight: FontWeight.bold )
+                      ),
                     )
                     ),
                 ),
