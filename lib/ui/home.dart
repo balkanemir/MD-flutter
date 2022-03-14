@@ -296,11 +296,15 @@ class _BillSpliterState extends State<BillSpliter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add)
+      ),
         body: Container(
             margin:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
             alignment: Alignment.center,
-            color: Colors.white24,
+            //color: Colors.white24,
             child: ListView(
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.all(20.2),
@@ -309,33 +313,41 @@ class _BillSpliterState extends State<BillSpliter> {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      color: _purple.withOpacity(0.1),
+              //        color: _purple.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("Total Per Person", style: TextStyle(
-                          color: _purple,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal
-                        )), Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text("\$ ${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage)}", style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32,
-                            color: _purple
-                          )),
-                        )],
+                      child: Container(
+                        height: 130.0,
+                        width: 430.0,
+                        child: Card(
+                            
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [Text("Total Per Person", style: TextStyle(
+                                          //          color: _purple,
+                                            //        fontSize: 15,
+                                              //      fontWeight: FontWeight.normal
+                              )), Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text("\$ ${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage)}", style: TextStyle(
+                                       //               fontWeight: FontWeight.bold,
+                                         //             fontSize: 32,
+                                           //           color: _purple
+                                )),
+                              )],
+                            ),
+                          
+                        ),
                       ),
                     )),
                 Container(
                     margin: EdgeInsets.only(top: 20.0),
                     padding: EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
-                        color: Colors.transparent,
+                 //       color: Colors.transparent,
                         border: Border.all(
-                            color: Colors.blueGrey.shade100,
+                   //         color: Colors.blueGrey.shade100,
                             style: BorderStyle.solid),
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Column(
@@ -343,7 +355,7 @@ class _BillSpliterState extends State<BillSpliter> {
                         TextField(
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
-                          style: TextStyle(color: _purple),
+               //           style: TextStyle(color: _purple),
                           decoration: InputDecoration(
                               prefixText: "Bill Amount:",
                               prefixIcon: Icon(Icons.monetization_on_rounded)),
@@ -360,7 +372,7 @@ class _BillSpliterState extends State<BillSpliter> {
                           children: [
                             Text("Split",
                                 style: TextStyle(
-                                  color: Colors.grey.shade700,
+                 //                 color: Colors.grey.shade700,
                                 )),
                             Row(
                               children: [
@@ -379,18 +391,19 @@ class _BillSpliterState extends State<BillSpliter> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(7.0),
-                                            color: _purple.withOpacity(0.1)),
+                                            //color: _purple.withOpacity(0.1)
+                                            ),
                                         child: Center(
                                           child: Text("-",
                                               style: TextStyle(
-                                                  color: _purple,
-                                                  fontWeight: FontWeight.bold,
+                   //                               color: _purple,
+                     //                             fontWeight: FontWeight.bold,
                                                   fontSize: 17.0)),
                                         ))),
                                 Text("$_personCounter",
                                     style: TextStyle(
-                                        color: _purple,
-                                        fontWeight: FontWeight.bold,
+                       //                 color: _purple,
+                         //               fontWeight: FontWeight.bold,
                                         fontSize: 17.0)),
                                 InkWell(
                                     onTap: () {
@@ -403,13 +416,13 @@ class _BillSpliterState extends State<BillSpliter> {
                                         height: 40.0,
                                         margin: EdgeInsets.all(10.0),
                                         decoration: BoxDecoration(
-                                            color: _purple.withOpacity(0.1),
+                           //                 color: _purple.withOpacity(0.1),
                                             borderRadius:
                                                 BorderRadius.circular(7.0)),
                                         child: Center(
                                           child: Text("+",
                                               style: TextStyle(
-                                                  color: _purple,
+                             //                     color: _purple,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 17.0)),
                                         ))),
@@ -428,7 +441,7 @@ class _BillSpliterState extends State<BillSpliter> {
                               padding: const EdgeInsets.all(12.0),
                               child: Center(
                                 child: Text("\$ ${(calculateTotalTip(_billAmount, _personCounter, _tipPercentage)).toStringAsFixed(2)}", style: TextStyle(
-                                  color: _purple,
+                               //   color: _purple,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),),
@@ -440,11 +453,11 @@ class _BillSpliterState extends State<BillSpliter> {
                           children: [
                             Text("$_tipPercentage %",
                                 style: TextStyle(
-                                    color: _purple,
+                         //           color: _purple,
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.bold)),
                             Slider(
-                                activeColor: _purple,
+                     //           activeColor: _purple,
                                 inactiveColor: Colors.grey,
                                 divisions: 20,
                                 min: 0,
