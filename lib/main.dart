@@ -12,6 +12,7 @@ ThemeData _buildMortgageTheme() {
   final ThemeData base = ThemeData.light();
 
   return base.copyWith(
+    backgroundColor: primaryTealDark,
     accentColor: primaryTealDark,
     primaryColor: primaryTeal50,
     scaffoldBackgroundColor: secondaryBackgroundWhite,
@@ -39,6 +40,8 @@ _buildMortgageTextTheme(TextTheme base) {
       color: textOnPrimaryBlack,
       fontSize: 16.0
     ) 
+  ).apply(
+    fontFamily: 'Lobster'
   );
 }
 

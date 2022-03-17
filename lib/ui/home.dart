@@ -2,6 +2,8 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:myapp/ui/utils/colors.dart';
+import 'package:myapp/ui/utils/colors.dart';
 import '../models/movie.dart';
 import '../models/questions.dart';
 import 'movie_ui/movie_ui.dart';
@@ -347,7 +349,7 @@ class _BillSpliterState extends State<BillSpliter> {
                     decoration: BoxDecoration(
                  //       color: Colors.transparent,
                         border: Border.all(
-                   //         color: Colors.blueGrey.shade100,
+                            color: primaryTealDark,
                             style: BorderStyle.solid),
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Column(
@@ -391,13 +393,13 @@ class _BillSpliterState extends State<BillSpliter> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(7.0),
-                                            //color: _purple.withOpacity(0.1)
+                                            color: secondaryBrown500,//_purple.withOpacity(0.1)
                                             ),
                                         child: Center(
                                           child: Text("-",
                                               style: TextStyle(
-                   //                               color: _purple,
-                     //                             fontWeight: FontWeight.bold,
+                                                 color: secondaryBackgroundWhite,
+                                                 fontWeight: FontWeight.bold,
                                                   fontSize: 17.0)),
                                         ))),
                                 Text("$_personCounter",
@@ -416,13 +418,13 @@ class _BillSpliterState extends State<BillSpliter> {
                                         height: 40.0,
                                         margin: EdgeInsets.all(10.0),
                                         decoration: BoxDecoration(
-                           //                 color: _purple.withOpacity(0.1),
+                                            color: secondaryBrown500,//_purple.withOpacity(0.1),
                                             borderRadius:
                                                 BorderRadius.circular(7.0)),
                                         child: Center(
                                           child: Text("+",
                                               style: TextStyle(
-                             //                     color: _purple,
+                                                  color: secondaryBackgroundWhite,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 17.0)),
                                         ))),
